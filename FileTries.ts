@@ -1,7 +1,7 @@
 import { Trie } from "tiny-trie";
-import { SymbolInfo } from "./SymbolInfo";
-import { normalizeSymbolName } from "./util";
-export class FileTries {
+import { SymbolInfo } from "../SymbolInfo";
+import { normalizeSymbolName } from "../util";
+export class BaseFileTries {
   private allSymbols: Trie = new Trie();
   private symbolMap: Map<string, SymbolInfo> = new Map();
   /**
