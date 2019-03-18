@@ -32,18 +32,20 @@ export class BaseDocumentSymbolManagerClass {
 
   protected parseSymbolsUsingRegex(
     fileTries: BaseFileTries,
-    text: string,
+    document: vscode.TextDocument,
     regex: RegExp,
     callback: {
-      (captures: string[]): BaseSymbolInfo | null;
+      (
+        document: vscode.TextDocument,
+        captures: RegExpExecArray
+      ): BaseSymbolInfo | null;
     }
   ) {
+    let text = document.getText();
     let captures: RegExpExecArray | null;
     while ((captures = regex.exec(text))) {
-      let symbolInfo = callback(captures);
+      let symbolInfo = callback(document, captures);
       if (!symbolInfo) continue;
-      // Set the position we found it as
-      symbolInfo.symbolDeclPos = captures.index;
       fileTries.add(symbolInfo);
     }
   }
