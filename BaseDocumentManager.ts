@@ -24,7 +24,7 @@ export class BaseDocumentSymbolManagerClass {
   protected systemSymbols: BaseSymbolInfo[] = [];
 
   init(context: vscode.ExtensionContext) {}
-
+  constructor() {}
   // Normalize path of document filename
   protected normalizePathtoDoc(document: vscode.TextDocument) {
     return path.normalize(vscode.workspace.asRelativePath(document.fileName));
