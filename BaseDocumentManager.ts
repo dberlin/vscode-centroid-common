@@ -73,13 +73,13 @@ export class BaseDocumentSymbolManagerClass {
     }
   }
   protected hasDocument(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
+    const filename = this.normalizePathtoDoc(document);
     return this.tries.has(filename);
   }
   // Parse and add a document to our list of managed documents
   parseAndAddDocument(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
-    let fileTries = this.tries.get(filename);
+    const filename = this.normalizePathtoDoc(document);
+    const fileTries = this.tries.get(filename);
     console.assert(
       fileTries !== undefined,
       "Somehow did not set filetrie properly"
@@ -100,11 +100,11 @@ export class BaseDocumentSymbolManagerClass {
     this.removeDocumentInternal(document);
   }
   protected removeDocumentInternal(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
+    const filename = this.normalizePathtoDoc(document);
     this.tries.delete(filename);
   }
   getTriesForDocument(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
+    const filename = this.normalizePathtoDoc(document);
     return this.tries.get(filename);
   }
 }

@@ -34,7 +34,7 @@ export class BaseFileTries {
    * @param prefix - prefix to get all completions for.
    */
   getAllCompletions(prefix: string): BaseSymbolInfo[] {
-    let wordResults: string[] = <string[]>(
+    const wordResults: string[] = <string[]>(
       this.allSymbols.search(normalizeSymbolName(prefix), { prefix: true })
     );
     return <BaseSymbolInfo[]>(
@@ -59,7 +59,7 @@ export class BaseFileTries {
    * @param symbolInfo - Symbol to add to tries.
    */
   add(symbolInfo: BaseSymbolInfo) {
-    let name = normalizeSymbolName(symbolInfo.label);
+    const name = normalizeSymbolName(symbolInfo.label);
     this.allSymbols.insert(name);
     this.symbolMap.set(name, symbolInfo);
   }
@@ -70,7 +70,7 @@ export class BaseFileTries {
    * @returns The found symbol or null.
    */
   getSymbol(label: string): BaseSymbolInfo | null {
-    let res = this.symbolMap.get(normalizeSymbolName(label));
+    const res = this.symbolMap.get(normalizeSymbolName(label));
     return !res ? null : res;
   }
   /**

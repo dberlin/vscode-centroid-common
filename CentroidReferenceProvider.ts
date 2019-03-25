@@ -39,16 +39,16 @@ export class CentroidReferenceProvider implements vscode.ReferenceProvider {
     // This may take a while so use a promise.
     return new Promise(resolve => {
       // We use a simple regex to find the occurrences for now
-      let wordToLookFor = getWordForPosition(document, position);
+      const wordToLookFor = getWordForPosition(document, position);
       if (!wordToLookFor) {
         resolve([]);
         return;
       }
-      let docText = document.getText();
-      let regexToUse = RegExp("\\b".concat(wordToLookFor, "\\b"), "g");
-      let locationResults: vscode.Location[] = [];
+      const docText = document.getText();
+      const regexToUse = RegExp("\\b".concat(wordToLookFor, "\\b"), "g");
+      const locationResults: vscode.Location[] = [];
       while (regexToUse.exec(docText) != null) {
-        let resultPosition = document.positionAt(regexToUse.lastIndex);
+        const resultPosition = document.positionAt(regexToUse.lastIndex);
         locationResults.push(new vscode.Location(document.uri, resultPosition));
       }
       resolve(locationResults);
