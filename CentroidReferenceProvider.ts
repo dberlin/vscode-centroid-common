@@ -23,7 +23,7 @@
  */
 "use strict";
 import * as vscode from "vscode";
-import { getWordForPosition } from "../util";
+import { getWordForPosition } from "../vscode-util";
 /**
  * Handles finding occurrences of symbols in the document.
  *
