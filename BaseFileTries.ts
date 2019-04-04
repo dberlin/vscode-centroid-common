@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import { Trie } from "tiny-trie";
-import { BaseSymbolInfo } from "./BaseSymbolInfo";
 import { normalizeSymbolName } from "../util";
+import { BaseSymbolInfo } from "./BaseSymbolInfo";
 
 export class BaseFileTries {
   protected allSymbols: Trie = new Trie();
@@ -33,13 +33,13 @@ export class BaseFileTries {
    *
    * @param prefix - prefix to get all completions for.
    */
-  getAllCompletions(prefix: string): BaseSymbolInfo[] {
-    const wordResults: string[] = <string[]>(
+  public getAllCompletions(prefix: string): BaseSymbolInfo[] {
+    const wordResults: string[] = (
       this.allSymbols.search(normalizeSymbolName(prefix), { prefix: true })
-    );
-    return <BaseSymbolInfo[]>(
-      wordResults.map(obj => this.getSymbol(obj)).filter(obj => obj)
-    );
+    ) as string[];
+    return (
+      wordResults.map((obj) => this.getSymbol(obj)).filter((obj) => obj)
+    ) as BaseSymbolInfo[];
   }
   /**
    * Test whether we have any information about a named symbol.
@@ -49,7 +49,7 @@ export class BaseFileTries {
    * the symbol, even if various forms of lookups may not find it due to type
    * not matching, etc.
    */
-  contains(label: string): boolean {
+  public contains(label: string): boolean {
     return this.allSymbols.test(normalizeSymbolName(label));
   }
   /**
@@ -58,7 +58,7 @@ export class BaseFileTries {
    * This function takes care of adding the symbol to the relevant tries.
    * @param symbolInfo - Symbol to add to tries.
    */
-  add(symbolInfo: BaseSymbolInfo) {
+  public add(symbolInfo: BaseSymbolInfo) {
     const name = normalizeSymbolName(symbolInfo.label);
     this.allSymbols.insert(name);
     this.symbolMap.set(name, symbolInfo);
@@ -69,7 +69,7 @@ export class BaseFileTries {
    * @param label - Symbol name to look for.
    * @returns The found symbol or null.
    */
-  getSymbol(label: string): BaseSymbolInfo | null {
+  public getSymbol(label: string): BaseSymbolInfo | null {
     const res = this.symbolMap.get(normalizeSymbolName(label));
     return !res ? null : res;
   }
@@ -77,7 +77,7 @@ export class BaseFileTries {
    * Freeze all the tries so no more insertion can take place,
    * and convert them into DAWGs
    */
-  freeze() {
+  public freeze() {
     this.allSymbols.freeze();
   }
 }

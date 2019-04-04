@@ -30,14 +30,14 @@ import { getWordForPosition } from "../vscode-util";
  * @remarks Currently uses regular expressions, not real knowledge.
  */
 export class CentroidReferenceProvider implements vscode.ReferenceProvider {
-  provideReferences(
+  public provideReferences(
     document: vscode.TextDocument,
     position: vscode.Position,
     context: vscode.ReferenceContext,
-    token: vscode.CancellationToken
+    token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.Location[]> {
     // This may take a while so use a promise.
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       // We use a simple regex to find the occurrences for now
       const wordToLookFor = getWordForPosition(document, position);
       if (!wordToLookFor) {
